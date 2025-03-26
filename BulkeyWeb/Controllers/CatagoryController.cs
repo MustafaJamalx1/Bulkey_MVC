@@ -48,7 +48,6 @@ namespace BulkeyWeb.Controllers
             {
                 return NotFound();
             }
-            Console.WriteLine(catagoryFromDb.CatagoreyId);
             return View(catagoryFromDb);
         }
         [HttpPost]
