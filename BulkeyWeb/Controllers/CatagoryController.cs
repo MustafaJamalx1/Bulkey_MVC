@@ -10,7 +10,7 @@ namespace BulkeyWeb.Controllers
         public CatagoryController(ApplicationDbContext db)
         {
             _db = db;
-            
+
         }
         public IActionResult Index()
         {
@@ -28,14 +28,40 @@ namespace BulkeyWeb.Controllers
             //{
             //    ModelState.AddModelError("Name", "the Catagory Name and the display order cannot be exactly the same");
             //}
-           
+
             if (ModelState.IsValid)
             {
-            _db.Catagories.Add(obj);
-            _db.SaveChanges();
-            return RedirectToAction("Index","Catagory");
+                _db.Catagories.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index", "Catagory");
             }
             return View();
         }
+        public IActionResult Edit(int id)
+        {
+            if (id == 0)
+            {
+                return NotFound();
+            }
+            Catagory catagoryFromDb = _db.Catagories.Find(id);
+            if (catagoryFromDb == null)
+            {
+                return NotFound();
+            }
+            Console.WriteLine(catagoryFromDb.CatagoreyId);
+            return View(catagoryFromDb);
+        }
+        [HttpPost]
+        public IActionResult Edit(Catagory obj) { 
+          
+            if (ModelState.IsValid)
+            {
+                _db.Catagories.Update(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        return View();
+        }
+
     }
 }
