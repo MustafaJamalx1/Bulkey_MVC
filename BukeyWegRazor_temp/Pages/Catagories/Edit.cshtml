@@ -1,0 +1,39 @@
+﻿@page
+@model BukeyWegRazor_temp.Pages.Catagories.EditModel
+
+<form method="post">
+	<input asp-for="catagory.CatagoreyId" hidden />
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Edit Catagory</h2>
+			<hr />
+		</div>
+		<div asp-validation-summary="ModelOnly"></div>
+		<div class="mb-3 row p-1">
+			<label asp-for="catagory.Name" class="p-0"></label>
+			<input asp-for="catagory.Name" type="text" class="form-control" />
+			<span asp-validation-for="catagory.Name" class="text-danger"></span>
+		</div>
+		<div class="mb-3 row p-1">
+			<label asp-for="catagory.DisplayOrder" class="p-0"></label>
+			<input asp-for="catagory.DisplayOrder" class="form-control" />
+			<span asp-validation-for="catagory.DisplayOrder" class="text-danger"></span>
+		</div>
+		<div class="row">
+			<div class="col-6  col-md-3">
+				<button type="submit" class="btn btn-primary form-control">Update</button>
+			</div>
+			<div class="col-6 col-md-3">
+				<a asp-page="/catagories/index" class="btn btn-outline-secondary form-control border">Back to List</a>
+			</div>
+		</div>
+	</div>
+
+</form>
+@section scripts {
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
+
+
