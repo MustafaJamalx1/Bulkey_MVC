@@ -5,8 +5,6 @@ VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulkeyWeb", "BulkeyWeb\BulkeyWeb.csproj", "{399B2275-BC46-47F9-965C-EC08854C6ACA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BukeyWegRazor_temp", "BukeyWegRazor_temp\BukeyWegRazor_temp.csproj", "{CBEDB39B-B813-4DDF-A793-486444A4132B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{399B2275-BC46-47F9-965C-EC08854C6ACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{399B2275-BC46-47F9-965C-EC08854C6ACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{399B2275-BC46-47F9-965C-EC08854C6ACA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CBEDB39B-B813-4DDF-A793-486444A4132B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CBEDB39B-B813-4DDF-A793-486444A4132B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CBEDB39B-B813-4DDF-A793-486444A4132B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CBEDB39B-B813-4DDF-A793-486444A4132B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
