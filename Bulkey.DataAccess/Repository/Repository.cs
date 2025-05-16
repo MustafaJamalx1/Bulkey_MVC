@@ -12,39 +12,41 @@ namespace Bulkey.DataAccess.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
+
         private readonly ApplicationDbContext _db;
-        internal DbSet<T> dbSet;
+        internal DbSet<T> dbset;
         public Repository(ApplicationDbContext db)
         {
-            db = _db;
-            this.dbSet = _db.Set<T>();
+            _db = db;
+            this.dbset = _db.Set<T>();
+
         }
         public void Add(T entity)
         {
-           dbSet.Add(entity);
+            dbset.Add(entity);
         }
 
         public T Get(Expression<Func<T, bool>> filter)
         {
-            IQueryable<T> query = dbSet;
-            query.Where(filter);
+            IQueryable<T> query = dbset;
+            query = query.Where(filter);
             return query.FirstOrDefault();
         }
 
         public IEnumerable<T> GetAll()
         {
-            IQueryable<T> query = dbSet;
+            IQueryable<T> query= dbset;
             return query.ToList();
         }
 
         public void Remove(T entity)
         {
-            dbSet.Remove(entity);
+            dbset.Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<T> entity)
         {
-            dbSet.RemoveRange(entity);
+            dbset.RemoveRange(entity);
         }
     }
 }

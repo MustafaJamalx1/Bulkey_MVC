@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Bulkey.DataAccess\Bulkey.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
