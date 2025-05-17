@@ -7,7 +7,7 @@ namespace Bulkey.Models
     public class Catagory
     {
         [Key]
-        public int CatagoreyId { get; set; }
+        public int CatagoryId { get; set; }
 
         [DisplayName("Catagory Name")]
         [MaxLength(30)]

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Bulkey.DataAccess.Data;
 using Bulkey.DataAccess.Repository.IRepository;
-using BulkeyWeb.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bulkey.DataAccess.Repository
@@ -15,12 +15,16 @@ namespace Bulkey.DataAccess.Repository
 
         private readonly ApplicationDbContext _db;
         internal DbSet<T> dbset;
+        private ApplicationDbContext db;
+
         public Repository(ApplicationDbContext db)
         {
             _db = db;
             this.dbset = _db.Set<T>();
 
         }
+
+
         public void Add(T entity)
         {
             dbset.Add(entity);

@@ -3,6 +3,7 @@ using Bulkey.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bulkey.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250517074716_seedingProductAndCatagoryls")]
+    partial class seedingProductAndCatagoryls
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,11 +26,11 @@ namespace Bulkey.DataAccess.Migrations
 
             modelBuilder.Entity("Bulkey.Models.Catagory", b =>
                 {
-                    b.Property<int>("CatagoryId")
+                    b.Property<int>("CatagoreyId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CatagoryId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CatagoreyId"));
 
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
@@ -37,26 +40,26 @@ namespace Bulkey.DataAccess.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.HasKey("CatagoryId");
+                    b.HasKey("CatagoreyId");
 
                     b.ToTable("Catagories");
 
                     b.HasData(
                         new
                         {
-                            CatagoryId = 1,
+                            CatagoreyId = 1,
                             DisplayOrder = 2,
                             Name = "Anime"
                         },
                         new
                         {
-                            CatagoryId = 2,
+                            CatagoreyId = 2,
                             DisplayOrder = 3,
                             Name = "Action"
                         },
                         new
                         {
-                            CatagoryId = 3,
+                            CatagoreyId = 3,
                             DisplayOrder = 1,
                             Name = "Crime"
                         });
@@ -73,9 +76,6 @@ namespace Bulkey.DataAccess.Migrations
                     b.Property<string>("Author")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CatagoryProductId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -103,8 +103,6 @@ namespace Bulkey.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CatagoryProductId");
-
                     b.ToTable("Products");
 
                     b.HasData(
@@ -112,7 +110,6 @@ namespace Bulkey.DataAccess.Migrations
                         {
                             Id = 1,
                             Author = "Billy Spark",
-                            CatagoryProductId = 1,
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "SWD9999001",
                             ListPrice = 99.0,
@@ -125,7 +122,6 @@ namespace Bulkey.DataAccess.Migrations
                         {
                             Id = 2,
                             Author = "Nancy Hoover",
-                            CatagoryProductId = 2,
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "CAW777777701",
                             ListPrice = 40.0,
@@ -138,7 +134,6 @@ namespace Bulkey.DataAccess.Migrations
                         {
                             Id = 3,
                             Author = "Julian Button",
-                            CatagoryProductId = 2,
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "RITO5555501",
                             ListPrice = 55.0,
@@ -151,7 +146,6 @@ namespace Bulkey.DataAccess.Migrations
                         {
                             Id = 4,
                             Author = "Abby Muscles",
-                            CatagoryProductId = 3,
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "WS3333333301",
                             ListPrice = 70.0,
@@ -164,7 +158,6 @@ namespace Bulkey.DataAccess.Migrations
                         {
                             Id = 5,
                             Author = "Ron Parker",
-                            CatagoryProductId = 2,
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "SOTJ1111111101",
                             ListPrice = 30.0,
@@ -177,7 +170,6 @@ namespace Bulkey.DataAccess.Migrations
                         {
                             Id = 6,
                             Author = "Laura Phantom",
-                            CatagoryProductId = 3,
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             ISBN = "FOT000000001",
                             ListPrice = 25.0,
@@ -186,17 +178,6 @@ namespace Bulkey.DataAccess.Migrations
                             Price50 = 22.0,
                             Title = "Leaves and Wonders"
                         });
-                });
-
-            modelBuilder.Entity("Bulkey.Models.Product", b =>
-                {
-                    b.HasOne("Bulkey.Models.Catagory", "Catagory")
-                        .WithMany()
-                        .HasForeignKey("CatagoryProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Catagory");
                 });
 #pragma warning restore 612, 618
         }

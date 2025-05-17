@@ -8,18 +8,18 @@ using Microsoft.EntityFrameworkCore;
 namespace BulkeyWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class CatagoryController : Controller
+    public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public CatagoryController(IUnitOfWork unitOfWork)
+        public ProductController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
 
         }
         public IActionResult Index()
         {
-            List<Catagory> catagoryList = _unitOfWork.Catagory.GetAll().ToList();
-            return View(catagoryList);
+            List<Product> productList = _unitOfWork.Product.GetAll().ToList();
+            return View(productList);
         }
 
         public IActionResult Create()
@@ -27,19 +27,15 @@ namespace BulkeyWeb.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Catagory obj)
+        public IActionResult Create(Product obj)
         {
-            //if (obj.Name!= null && obj.Name == obj.DisplayOrder.ToString())
-            //{
-            //    ModelState.AddModelError("Name", "the Catagory Name and the display order cannot be exactly the same");
-            //}
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.Catagory.Add(obj);
+                _unitOfWork.Product.Add(obj);
                 _unitOfWork.Save();
-                TempData["success"] = "Catagory created successfully";
-                return RedirectToAction("Index", "Catagory");
+                TempData["success"] = "Product created successfully";
+                return RedirectToAction("Index", "Product");
             }
             return View();
         }
@@ -49,22 +45,22 @@ namespace BulkeyWeb.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            Catagory catagoryFromDb = _unitOfWork.Catagory.Get(u => u.CatagoryId== id);
-            if (catagoryFromDb == null)
+            Product ProductFromDb = _unitOfWork.Product.Get(u => u.Id == id);
+            if (ProductFromDb == null)
             {
                 return NotFound();
             }
-            return View(catagoryFromDb);
+            return View(ProductFromDb);
         }
         [HttpPost]
-        public IActionResult Edit(Catagory obj)
+        public IActionResult Edit(Product obj)
         {
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.Catagory.Update(obj);
+                _unitOfWork.Product.Update(obj);
                 _unitOfWork.Save();
-                TempData["success"] = "Catagory Updated successfully";
+                TempData["success"] = "Product Updated successfully";
 
                 return RedirectToAction("Index");
             }
@@ -76,22 +72,22 @@ namespace BulkeyWeb.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            Catagory catagoryFromDb = _unitOfWork.Catagory.Get(u => u.CatagoryId == id);
-            if (catagoryFromDb == null)
+            Product ProductFromDb = _unitOfWork.Product.Get(u => u.Id == id);
+            if (ProductFromDb == null)
             {
                 return NotFound();
             }
-            return View(catagoryFromDb);
+            return View(ProductFromDb);
         }
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-            Catagory deleteCatagory = _unitOfWork.Catagory.Get(u => u.CatagoryId == id);
-            if (deleteCatagory != null)
+            Product deleteProduct = _unitOfWork.Product.Get(u => u.Id == id);
+            if (deleteProduct != null)
             {
-                _unitOfWork.Catagory.Remove(deleteCatagory);
+                _unitOfWork.Product.Remove(deleteProduct);
                 _unitOfWork.Save();
-                TempData["success"] = "Catagory deleted successfully";
+                TempData["success"] = "Product deleted successfully";
                 return RedirectToAction("Index");
             }
             return NotFound();
