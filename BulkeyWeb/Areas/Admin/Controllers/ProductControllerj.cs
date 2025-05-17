@@ -4,6 +4,7 @@ using Bulkey.Models;
 using Bulkey.DataAccess.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BulkeyWeb.Areas.Admin.Controllers
 {
@@ -19,11 +20,18 @@ namespace BulkeyWeb.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Product> productList = _unitOfWork.Product.GetAll().ToList();
+           
             return View(productList);
         }
 
         public IActionResult Create()
         {
+            IEnumerable<SelectListItem> CatagoryList = _unitOfWork.Catagory.GetAll().Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.CatagoryId.ToString()
+            });
+            ViewBag.CatagoryList = CatagoryList;
             return View();
         }
         [HttpPost]

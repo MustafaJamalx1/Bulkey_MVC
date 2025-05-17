@@ -29,7 +29,8 @@ public class ApplicationDbContext :DbContext
               Price = 90,
               Price50 = 85,
               Price100 = 80,
-              CatagoryProductId= 1
+              CatagoryProductId= 1,
+              ImageUrl=""
           },
                 new Product
                 {
@@ -42,7 +43,10 @@ public class ApplicationDbContext :DbContext
                     Price = 30,
                     Price50 = 25,
                     Price100 = 20,
-                    CatagoryProductId = 2
+                    CatagoryProductId = 2,
+                    ImageUrl = ""
+
+
 
                 },
                 new Product
@@ -56,7 +60,9 @@ public class ApplicationDbContext :DbContext
                     Price = 50,
                     Price50 = 40,
                     Price100 = 35,
-                    CatagoryProductId = 2
+                    CatagoryProductId = 2,
+                    ImageUrl = ""
+
 
                 },
                 new Product
@@ -70,7 +76,9 @@ public class ApplicationDbContext :DbContext
                     Price = 65,
                     Price50 = 60,
                     Price100 = 55,
-                    CatagoryProductId = 3
+                    CatagoryProductId = 3,
+                    ImageUrl = ""
+
 
                 },
                 new Product
@@ -84,7 +92,9 @@ public class ApplicationDbContext :DbContext
                     Price = 27,
                     Price50 = 25,
                     Price100 = 20,
-                    CatagoryProductId= 2
+                    CatagoryProductId= 2,
+                    ImageUrl = ""
+
                 },
                 new Product
                 {
@@ -97,7 +107,9 @@ public class ApplicationDbContext :DbContext
                     Price = 23,
                     Price50 = 22,
                     Price100 = 20,
-                    CatagoryProductId= 3
+                    CatagoryProductId= 3,
+                    ImageUrl = ""
+
 
                 }
 
