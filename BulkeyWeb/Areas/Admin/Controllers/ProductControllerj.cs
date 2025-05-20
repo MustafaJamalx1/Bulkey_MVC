@@ -5,6 +5,7 @@ using Bulkey.DataAccess.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Bulkey.Models.ViewModels;
 
 namespace BulkeyWeb.Areas.Admin.Controllers
 {
@@ -26,21 +27,25 @@ namespace BulkeyWeb.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            IEnumerable<SelectListItem> CatagoryList = _unitOfWork.Catagory.GetAll().Select(u => new SelectListItem
+
+            ProductVM productVM = new()
             {
-                Text = u.Name,
-                Value = u.CatagoryId.ToString()
-            });
-            ViewBag.CatagoryList = CatagoryList;
-            return View();
+                CatagoryList = _unitOfWork.Catagory.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.CatagoryId.ToString()
+                }),
+                Product = new Product()
+            };
+            return View(productVM);
         }
         [HttpPost]
-        public IActionResult Create(Product obj)
+        public IActionResult Create(ProductVM obj)
         {
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Add(obj);
+                _unitOfWork.Product.Add(obj.Product);
                 _unitOfWork.Save();
                 TempData["success"] = "Product created successfully";
                 return RedirectToAction("Index", "Product");
@@ -87,8 +92,8 @@ namespace BulkeyWeb.Areas.Admin.Controllers
             }
             return View(ProductFromDb);
         }
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeletePOST(int? id)
+        [HttpPost]
+        public IActionResult Delete(int? id)
         {
             Product deleteProduct = _unitOfWork.Product.Get(u => u.Id == id);
             if (deleteProduct != null)
