@@ -4,13 +4,14 @@
 	<div class="card-header bg-secondary bg-gradient ml-0 py-3">
 		<div class="row">
 			<div class="col-12 text-center">
-			 <h2 class="text-white py-2">Create Catagory</h2>
+			 <h2 class="text-white py-2">@(Model.Product.Id==0?"Create":"Update") Product</h2>
 
 			</div>
 		</div>
 	</div>
 	<div class="card-body p-4">
-		<form method="post"class="row">
+		<form method="post"class="row" enctype="multipart/form-data">
+			<input hidden asp-for="Product.Id" />
 			<div class="border p-3">
 				
 				<div asp-validation-summary="ModelOnly"></div>
@@ -19,10 +20,10 @@
 					<label asp-for="Product.Title" class="ms-2"></label>
 					<span asp-validation-for="Product.Title" class="text-danger"></span>
 				</div>
-				<div class="form-floating py-2 col-12">
-					<input asp-for="Product.Description" type="text" class="form-control border-0 shadow" />
-					<label asp-for="Product.Description" class="ms-2"></label>
-					<span asp-validation-for="Product.Description" class="text-danger"></span>
+				<div class=" py-2 col-12">
+					<label asp-for="Product.Description" class="ms-2 text-muted"></label>
+					<textarea asp-for="Product.Description" type="text" class="form-control border-0 shadow" ></textarea>
+					
 				</div>
 				<div class="form-floating py-2 col-12">
 					<input asp-for="Product.ISBN" type="text" class="form-control border-0 shadow" />
@@ -62,9 +63,9 @@
 					<span asp-validation-for="Product.CatagoryProductId" class="text-danger"></span>
 				</div>
 				<div class="form-floating py-2 col-12">
-					<input asp-for="Product.ImageUrl" type="text" class="form-control border-0 shadow" />
+					<input type="file" name="file" class="form-control border-0 shadow" />
 					<label asp-for="Product.ImageUrl" class="ms-2"></label>
-					<span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
+					
 				</div>
 				<div class="row">
 					<div class="col-6  col-md-3">
@@ -81,6 +82,26 @@
 </div>
 
  @section scripts{
+	<script>
+		tinymce.init({
+		  selector: 'textarea',
+		  plugins: [
+			// Core editing features
+			'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'lists',  'table', 'visualblocks', 'wordcount',
+			// Your account includes a free trial of TinyMCE premium features
+			// Try the most popular premium features until Jun 3, 2025:
+			
+		  ],
+		  toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+		  tinycomments_mode: 'embedded',
+		  tinycomments_author: 'Author name',
+		  mergetags_list: [
+			{ value: 'First.Name', title: 'First Name' },
+			{ value: 'Email', title: 'Email' },
+		  ],
+		  ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+		});
+	</script>
 	 @{
 		 <partial name="_ValidationScriptsPartial" />
 	 }
