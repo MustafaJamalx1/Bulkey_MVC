@@ -60,7 +60,7 @@ namespace BulkeyWeb.Areas.Admin.Controllers
                 {
                     string fileName=Guid.NewGuid().ToString() +Path.GetExtension(file.FileName);
                     string productPath=Path.Combine(wwwRootPath, @"Images\Product");
-
+                    
                     if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
                     {
                         string oldImgPath = Path.Combine(wwwRootPath+productVM.Product.ImageUrl.Replace("/","\\"));
