@@ -23,7 +23,7 @@ namespace BulkeyWeb.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Product> productList = _unitOfWork.Product.GetAll().ToList();
+            List<Product> productList = _unitOfWork.Product.GetAll(includeProperties:"Catagory").ToList();
            
             return View(productList);
         }
@@ -60,16 +60,33 @@ namespace BulkeyWeb.Areas.Admin.Controllers
                 {
                     string fileName=Guid.NewGuid().ToString() +Path.GetExtension(file.FileName);
                     string productPath=Path.Combine(wwwRootPath, @"Images\Product");
+
+                    if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
+                    {
+                        string oldImgPath = Path.Combine(wwwRootPath+productVM.Product.ImageUrl.Replace("/","\\"));
+
+                        if (System.IO.File.Exists(oldImgPath))
+                        {
+                            System.IO.File.Delete(oldImgPath);
+                        }
+                    }
                     
                     using( var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
                     {
                         file.CopyTo(fileStream);
 
                     }
-                    productVM.Product.ImageUrl = @"Images\Product"+fileName;
+                    productVM.Product.ImageUrl = @"/Images/Product/" + fileName;
                     
                 }
+                if (productVM.Product.Id == 0)
+                {
                 _unitOfWork.Product.Add(productVM.Product);
+                }
+                else
+                {
+                    _unitOfWork.Product.Update(productVM.Product);
+                }
                 _unitOfWork.Save();
                 TempData["success"] = "Product created successfully";
                 return RedirectToAction("Index", "Product");
