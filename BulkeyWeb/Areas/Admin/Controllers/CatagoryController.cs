@@ -4,10 +4,13 @@ using Bulkey.Models;
 using Bulkey.DataAccess.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Bulkey.Utilites;
 
 namespace BulkeyWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles =SD.Role_Admin)]
     public class CatagoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

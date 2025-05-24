@@ -7,10 +7,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Bulkey.Models.ViewModels;
 using NuGet.Common;
+using Microsoft.AspNetCore.Authorization;
+using Bulkey.Utilites;
 
 namespace BulkeyWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles =SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
