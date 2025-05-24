@@ -1,9 +1,12 @@
 ﻿using Bulkey.Models;
+using Bulkey.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bulkey.DataAccess.Data;
 
-public class ApplicationDbContext :DbContext
+public class ApplicationDbContext :IdentityDbContext<IdentityUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
@@ -12,6 +15,7 @@ public class ApplicationDbContext :DbContext
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Catagory>().HasData(
             new Catagory { CatagoryId = 1, Name = "Anime", DisplayOrder = 2 },
             new Catagory { CatagoryId = 2, Name = "Action", DisplayOrder = 3 },
@@ -120,5 +124,5 @@ public class ApplicationDbContext :DbContext
     }
     public DbSet<Catagory> Catagories { get; set; }
     public DbSet<Product> Products{ get; set; }
-
+    public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 }
